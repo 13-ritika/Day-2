@@ -1,0 +1,40 @@
+// https://leetcode.com/problems/longest-palindrome/
+//Approach 1
+class Solution {
+    public int longestPalindrome(String s) {
+
+        if(s==null || s.length()==0) return 0; 
+        HashSet<Character> map = new HashSet<Character>();
+        int count = 0;
+        for(int i=0; i<s.length(); i++){
+            if(map.contains(s.charAt(i))){
+                map.remove(s.charAt(i));
+                count++;
+            }else{
+                map.add(s.charAt(i));
+            }
+        }
+        if(!map.isEmpty()) return count*2+1; // here we have an extra character to be put in the middle.
+        return count*2; // if the string contains characters that only has even occurence => no extra character to make a palindrome.
+    }
+}
+
+//Approach 2
+
+class Solution {
+    public int longestPalindrome(String s) {
+
+        char[] main_chars = s.toCharArray();
+        int[] chars = new int[256];
+        for(char c:main_chars){
+            chars[c]++;
+        }
+        int extra = 0;
+        for(int n:chars){
+            if(n%2!=0){
+                extra++;
+            }
+        }
+        return extra > 1 ? main_chars.length - extra + 1 : main_chars.length;
+    }
+}
