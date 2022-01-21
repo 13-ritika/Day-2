@@ -1,0 +1,31 @@
+// https://leetcode.com/problems/maximum-score-from-removing-stones/
+// Approach
+class Solution {
+    public int maximumScore(int a, int b, int c) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>((a1, b1) -> (b1 - a1));
+        maxHeap.add(a);
+        maxHeap.add(b);
+        maxHeap.add(c);
+        
+        int score = 0;
+        while(maxHeap.size() > 1){
+            //find first two max number
+            int maxNum1 = maxHeap.poll();
+            int maxNum2 = maxHeap.poll();
+            maxNum1--;
+            maxNum2--;
+            if(maxNum1 > 0) maxHeap.add(maxNum1);
+            if(maxNum2 > 0) maxHeap.add(maxNum2);
+            score++;
+        }
+        
+        return score;
+    }
+}
+ 
+ // Runs 57/96 test cases.
+ class Solution {
+    public int maximumScore(int a, int b, int c) {
+        return (int)Math.floor((a+b+c)/2);
+    }
+}
