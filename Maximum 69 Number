@@ -1,0 +1,50 @@
+// https://leetcode.com/problems/maximum-69-number/ (MATH, GREEDY)
+// Approach 1
+class Solution {
+    public int maximum69Number (int num) {
+        String str = Integer.toString(num);
+        StringBuilder sb = new StringBuilder();
+        int i;
+        for(i=0;i<str.length();i++){
+            if(str.charAt(i)=='9') sb.append(str.charAt(i));
+            if(str.charAt(i)=='6') {
+                sb.append(9);
+                break;
+            }
+        }
+        
+        for(int p=i+1;p<str.length();p++) sb.append(str.charAt(p));
+        return Integer.parseInt(sb.toString());
+    }
+}
+
+// Approach 2
+class Solution {
+public int maximum69Number(int num) {
+	char[] chars = Integer.toString(num).toCharArray();
+	for (int i = 0; i < chars.length; i++) {
+		if (chars[i] == '6') {
+			chars[i] = '9';
+			break;
+		}
+	}
+	return Integer.parseInt(new String(chars));
+}
+}
+
+// Approach 3
+class Solution {
+    public int maximum69Number (int num) {
+        
+        int add = 0,base=1,temp=num;
+        while(temp > 0) {
+            int d = temp%10;
+            temp /= 10;
+            
+            if (d==6) 
+                add = 3*base;
+            base*=10;
+        }
+        return num+add;
+    }
+}
